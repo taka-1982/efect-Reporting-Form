@@ -14,7 +14,7 @@
       display: block;
       margin-top: 10px;
     }
-    input, textarea {
+    input, textarea, select {
       width: 100%;
       margin-top: 5px;
     }
@@ -31,50 +31,19 @@
       <input type="text" id="name" required>
     </label>
 
+    <label>施設：
+      <select id="facility" required>
+        <option value="">選択してください</option>
+        <option value="水処理">水処理</option>
+        <option value="汚泥処理">汚泥処理</option>
+        <option value="焼却">焼却</option>
+      </select>
+    </label>
+
     <label>設備名：
       <input type="text" id="equipment" required>
     </label>
 
     <label>異常内容：
       <textarea id="detail" required rows="4"></textarea>
-    </label>
-
-    <label>写真アップロード：
-      <input type="file" id="imageFile" accept="image/*" required>
-    </label>
-
-    <button type="submit">送信</button>
-  </form>
-
-  <script>
-    document.getElementById("uploadForm").addEventListener("submit", async function (e) {
-      e.preventDefault();
-      const file = document.getElementById("imageFile").files[0];
-      if (!file) return alert("画像を選択してください");
-
-      const reader = new FileReader();
-      reader.onload = function () {
-        const payload = {
-          name: document.getElementById("name").value,
-          equipment: document.getElementById("equipment").value,
-          detail: document.getElementById("detail").value,
-          fileName: file.name,
-          imageBase64: reader.result
-        };
-
-        fetch("★★ここにGASのWebアプリURLを貼ってください★★", {
-          method: "POST",
-          body: JSON.stringify(payload),
-          headers: {
-            "Content-Type": "application/json"
-          }
-        })
-        .then(res => res.text())
-        .then(msg => alert("送信成功：" + msg))
-        .catch(err => alert("送信失敗：" + err));
-      };
-      reader.readAsDataURL(file);
-    });
-  </script>
-</body>
-</html>
+    </label
