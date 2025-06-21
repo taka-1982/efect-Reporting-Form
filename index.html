@@ -1,63 +1,80 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="ja">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2487.5">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Times; -webkit-text-stroke: #000000; min-height: 14.0px}
-    span.s1 {font-kerning: none}
+  <meta charset="UTF-8">
+  <title>点検報告フォーム</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    input, textarea {
+      width: 100%;
+      margin-top: 5px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+    }
   </style>
 </head>
 <body>
-<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
-<p class="p1"><span class="s1">&lt;html lang="ja"&gt;</span></p>
-<p class="p1"><span class="s1">&lt;head&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;title&gt;点検報告フォーム&lt;/title&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
-<p class="p1"><span class="s1">&lt;body&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;h2&gt;点検報告フォーム&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;form id="uploadForm"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;label&gt;点検者名：&lt;input type="text" id="name" required&gt;&lt;/label&gt;&lt;br&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;label&gt;設備名：&lt;input type="text" id="equipment" required&gt;&lt;/label&gt;&lt;br&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;label&gt;異常内容：&lt;textarea id="detail" required&gt;&lt;/textarea&gt;&lt;/label&gt;&lt;br&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;label&gt;写真アップロード：&lt;input type="file" id="imageFile" accept="image/*" required&gt;&lt;/label&gt;&lt;br&gt;&lt;br&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;button type="submit"&gt;送信&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/form&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;script&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>document.getElementById("uploadForm").addEventListener("submit", async function (e) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>e.preventDefault();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>const file = document.getElementById("imageFile").files[0];</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>if (!file) return alert("画像を選択してください");</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>const reader = new FileReader();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>reader.onload = function () {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const payload = {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>name: document.getElementById("name").value,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>equipment: document.getElementById("equipment").value,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>detail: document.getElementById("detail").value,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>fileName: file.name,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>imageBase64: reader.result</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>};</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>fetch("★ここにGASのWebアプリURLを貼る★", {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>method: "POST",</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>body: JSON.stringify(payload),</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">          </span>headers: { "Content-Type": "application/json" }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>})</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.then(res =&gt; res.text())</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.then(msg =&gt; alert("送信成功：" + msg))</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.catch(err =&gt; alert("送信失敗：" + err));</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>};</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">      </span>reader.readAsDataURL(file);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>});</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">  </span>&lt;/script&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
+  <h2>点検報告フォーム</h2>
+  <form id="uploadForm">
+    <label>点検者名：
+      <input type="text" id="name" required>
+    </label>
+
+    <label>設備名：
+      <input type="text" id="equipment" required>
+    </label>
+
+    <label>異常内容：
+      <textarea id="detail" required rows="4"></textarea>
+    </label>
+
+    <label>写真アップロード：
+      <input type="file" id="imageFile" accept="image/*" required>
+    </label>
+
+    <button type="submit">送信</button>
+  </form>
+
+  <script>
+    document.getElementById("uploadForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const file = document.getElementById("imageFile").files[0];
+      if (!file) return alert("画像を選択してください");
+
+      const reader = new FileReader();
+      reader.onload = function () {
+        const payload = {
+          name: document.getElementById("name").value,
+          equipment: document.getElementById("equipment").value,
+          detail: document.getElementById("detail").value,
+          fileName: file.name,
+          imageBase64: reader.result
+        };
+
+        fetch("★★ここにGASのWebアプリURLを貼ってください★★", {
+          method: "POST",
+          body: JSON.stringify(payload),
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+        .then(res => res.text())
+        .then(msg => alert("送信成功：" + msg))
+        .catch(err => alert("送信失敗：" + err));
+      };
+      reader.readAsDataURL(file);
+    });
+  </script>
 </body>
 </html>
